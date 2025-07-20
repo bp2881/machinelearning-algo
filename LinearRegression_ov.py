@@ -1,11 +1,13 @@
 import pandas as pd
 import numpy as np
-from plot import plot
+from plot import ov_plot as plot
 
 
 def train(lr, n_iters, x_train, y_train):
     w, b = 0, 0
-    for _ in range(n_iters):
+    for i in range(n_iters):
+        if i % 1000 == 0 or i == n_iters - 1:
+            print("Iteration: ", i)
         dw = 0
         db = 0
         for j in range(x_train.size):
