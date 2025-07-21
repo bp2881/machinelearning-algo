@@ -11,12 +11,18 @@ convenience_stores = df['X4 number of convenience stores']
 nearest_mrt_station = df['X3 distance to the nearest MRT station']
 
 def ov_plot(w, b, cost):
-    x_line = np.linspace(house_age.min(), house_age.max(), 100)
-    y_line = w * x_line + b
+    x_min = house_age.min()
+    x_max = house_age.max()
+
+    x_line_scaled = np.linspace(0, 1, 100)
+    y_line = w * x_line_scaled + b
+
+    x_line_original = x_line_scaled * (x_max - x_min) + x_min
 
     plt.figure(figsize=(10, 6))
     plt.scatter(house_age, house_price, alpha=0.7, edgecolors='k', label='Data')
-    plt.plot(x_line, y_line, label=f'y = {w}x + {b}', color='blue', linewidth=2)
+    plt.plot(x_line_original, y_line, color='blue', linewidth=2,
+             label=f'y = {w:.4f}x + {b:.4f}')
     plt.xlabel('House Age (years)')
     plt.ylabel('House Price of Unit Area')
     plt.title(f'Prediction with Cost: {cost:.4f}')
@@ -25,6 +31,8 @@ def ov_plot(w, b, cost):
     plt.tight_layout()
     plt.savefig("ov_plot.png")
     plt.show()
+
+
 
 
 def mv_plot(w1, w2, w3, b, cost):
@@ -43,7 +51,7 @@ def mv_plot(w1, w2, w3, b, cost):
 
     plt.figure(figsize=(10, 6))
     plt.scatter(house_age, house_price, alpha=0.7, edgecolors='k', label='Actual Data')
-    plt.plot(x1_line_raw, y_line, color='blue', linewidth=2, label=f'y = {w1}x + {c}')
+    plt.plot(x1_line_raw, y_line, color='blue', linewidth=2, label=f'y = {w1:.4f}x + {c:.4f}')
     plt.xlabel('House Age')
     plt.ylabel('House Price of Unit Area')
     plt.title(f'Prediction with Cost: {cost:.4f}')
