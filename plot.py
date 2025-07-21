@@ -10,6 +10,11 @@ house_price = df['Y house price of unit area']
 convenience_stores = df['X4 number of convenience stores']
 nearest_mrt_station = df['X3 distance to the nearest MRT station']
 
+df2 = pd.read_csv("cancer.csv")
+perimeter_mean = df2["perimeter_mean"]
+diagnosis = df2["diagnosis"]
+
+
 def ov_plot(w, b, cost):
     x_min = house_age.min()
     x_max = house_age.max()
@@ -59,4 +64,19 @@ def mv_plot(w1, w2, w3, b, cost):
     plt.legend()
     plt.tight_layout()
     plt.savefig("mv_plot.png")
+    plt.show()
+
+
+def log_plot(w, b, cost, x_test, y_test):
+    x_vals = np.linspace(min(x_test), max(x_test), 100)
+    y_vals = 1 / (1 + np.exp(-(w * x_vals + b)))  
+
+    plt.plot(x_vals, y_vals, label="Sigmoid Curve")
+    plt.scatter(x_test, y_test, color='red', label="Test Data")
+    plt.xlabel("perimeter_mean")
+    plt.ylabel("Probability (Malignant)")
+    plt.title(f"Logistic Regression\nCost: {cost:.4f}")
+    plt.legend()
+    plt.grid(True)
+    plt.savefig("log_plot.png")
     plt.show()
