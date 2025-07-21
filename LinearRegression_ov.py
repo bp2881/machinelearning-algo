@@ -49,7 +49,10 @@ def sec(X, Y, w, b):
 
 def predict(lr, n_iters, x_train, y_train, x_test, y_test):
     w, b = train(lr, n_iters, x_train, y_train, x_test, y_test)
-    cost = sec(x_test, y_test, w, b)
+    test_cost = sec(x_test, y_test, w, b)
+    train_cost = sec(x_train, y_train, w, b)
+    cost = max(test_cost, train_cost)
+    
     print("Cost = ", cost)
     print(f"(w, b) = ({w:.4f}, {b:.4f})")
     plot(w, b, cost)
@@ -62,13 +65,13 @@ if __name__ == "__main__":
     x_total = data['X2 house age']
     y_total = data['Y house price of unit area']
 
-    x_train = x_total.head(400).to_numpy()
-    y_train = y_total.head(400).to_numpy()
+    x_train = x_total.head(375).to_numpy()
+    y_train = y_total.head(375).to_numpy()
 
-    x_test = x_total.tail(15).to_numpy()
-    y_test = y_total.tail(15).to_numpy()
+    x_test = x_total.tail(40).to_numpy()
+    y_test = y_total.tail(40).to_numpy()
 
-    # Feature Scaling
+    # Normalization
     scaling = lambda x: (x - x.min()) / (x.max() - x.min())
     x_train = scaling(x_train).astype(np.float64)
     x_test = scaling(x_test).astype(np.float64)

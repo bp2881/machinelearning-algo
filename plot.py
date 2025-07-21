@@ -37,9 +37,6 @@ def ov_plot(w, b, cost):
     plt.savefig("ov_plot.png")
     plt.show()
 
-
-
-
 def mv_plot(w1, w2, w3, b, cost):
     scale = lambda x: (x - x.min()) / (x.max() - x.min())
 
@@ -79,4 +76,28 @@ def log_plot(w, b, x_test, y_test, cost, accuracy):
     plt.legend()
     plt.grid(True)
     plt.savefig("log_plot.png")
+    plt.show()
+
+
+def plr_plot(w, b, cost):
+    x_min = house_age.min()
+    x_max = house_age.max()
+
+    x_line_scaled = np.linspace(0, 1, 100)
+
+    y_line = w * (x_line_scaled ** 2) + b
+
+    x_line_original = x_line_scaled * (x_max - x_min) + x_min
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(house_age, house_price, alpha=0.7, edgecolors='k', label='Data')
+    plt.plot(x_line_original, y_line, color='blue', linewidth=2,
+             label=f'y = {w:.4f}·x² + {b:.4f}')
+    plt.xlabel('House Age (years)')
+    plt.ylabel('House Price of Unit Area')
+    plt.title(f'Polynomial Regression (Degree 2)\nCost: {cost:.4f}')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig("plr_plot.png")
     plt.show()

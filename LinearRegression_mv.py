@@ -79,7 +79,7 @@ if __name__ == "__main__":
     x3_test = x3_total.tail(15).to_numpy()
     y_test = y_total.tail(15).to_numpy()
 
-    # Need to apply feature scaling
+    # Normalization
     scaling = lambda x: (x - x.min()) / (x.max() - x.min())
 
     x1_test = scaling(x1_test)
