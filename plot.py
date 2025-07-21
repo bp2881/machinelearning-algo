@@ -67,7 +67,7 @@ def mv_plot(w1, w2, w3, b, cost):
     plt.show()
 
 
-def log_plot(w, b, cost, x_test, y_test):
+def log_plot(w, b, x_test, y_test, cost, accuracy):
     x_vals = np.linspace(min(x_test), max(x_test), 100)
     y_vals = 1 / (1 + np.exp(-(w * x_vals + b)))  
 
@@ -75,7 +75,7 @@ def log_plot(w, b, cost, x_test, y_test):
     plt.scatter(x_test, y_test, color='red', label="Test Data")
     plt.xlabel("perimeter_mean")
     plt.ylabel("Probability (Malignant)")
-    plt.title(f"Logistic Regression\nCost: {cost:.4f}")
+    plt.title(f"Logistic Regression\nCost: {cost:.4f} Accuracy: {accuracy:.2f}%")
     plt.legend()
     plt.grid(True)
     plt.savefig("log_plot.png")
