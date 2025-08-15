@@ -11,6 +11,7 @@ def train_step(lr, n_iters, x_train, y_train, x_test, y_test):
     n = x_train.size
 
     for i in range(n_iters):
+        # Logging
         if i % 1000 == 0 or i == n_iters - 1:
             cost = sec(x_test, y_test, w, b)
             history[idx] = cost
@@ -31,10 +32,7 @@ def train_step(lr, n_iters, x_train, y_train, x_test, y_test):
 def train(lr, n_iters, x_train, y_train, x_test, y_test):
     w, b, history = train_step(lr, n_iters, x_train, y_train, x_test, y_test)
     for i, cost in enumerate(history):
-        step = i * 1000
-        if step > n_iters:
-            step = n_iters
-        print(f"Iteration: {step}, Cost: {cost}")
+        print(f"Iteration: {i * 1000}, Cost: {cost}")
     
     return w, b
 

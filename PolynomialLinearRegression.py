@@ -1,64 +1,73 @@
 import numpy as np
 import pandas as pd
 from plot import plr_plot as plot
+from numba import njit
 
-def train(lr, n_iters, x_train, y_train):
-    w, b = 0, 0
-    n = x_train.size
+@njit
+def sec(y_pred, y_true):
+    m = y_true.size
+    return (1 / (2 * m)) * np.sum((y_pred - y_true) ** 2)
+
+@njit
+def train_step(lr, n_iters, x, y):
+    m = x.size
+    w4, w3, w2, w1, b = 0.0, 0.0, 0.0, 0.0, 0.0
+    history = np.zeros(n_iters // 1000 + 1)
+    idx = 0
     for i in range(n_iters):
+        y_pred = w4 * (x ** 4) + w3 * (x ** 3) + w2 * (x ** 2) + w1 * x + b
+        error  = y_pred - y
+
+        dw4 = (1 / m) * np.dot(error, x**4)       
+        dw3 = (1 / m) * np.dot(error, x**3)
+        dw2 = (1 / m) * np.dot(error, x**2)
+        dw1 = (1 / m) * np.dot(error, x)
+        db  = (1 / m) * np.sum(error)
+
+        w4 -= lr * dw4
+        w3 -= lr * dw3
+        w2 -= lr * dw2
+        w1 -= lr * dw1
+        b  -= lr * db
+
         if i % 1000 == 0 or i == n_iters - 1:
-            cost = sec(x_train, y_train, w, b)
-            print(f"Iteration: {i}, Cost: {cost}")
-        y_pred = w * (x_train**3) + b
-        error = y_pred - y_train
+            cost = sec(y_pred, y)
+            history[idx] = cost
+            idx += 1
+    return w4, w3, w2, w1, b, history
 
-        dw = np.dot(error, x_train **3)
-        db = np.sum(error)
-
-        w -= lr * dw / n
-        b -= lr * db / n
-    
-    return w, b
-
-# Squared Error cost Function
-def sec(X, Y, w, b):
-    y_pred = w * (X**3) + b
-    error = y_pred - Y
-    cost = (1 / (2 * X.size)) * np.sum(error **3)
-    return cost
+def train(lr, n_iters, x, y):
+    w4, w3, w2, w1, b, history = train_step(lr, n_iters, x, y)
+    for i, cost in enumerate(history):
+        print(f"Iteration: {i*1000}, Cost: {cost}")
+    return w4, w3, w2, w1, b
 
 def predict(lr, n_iters, x_train, y_train, x_test, y_test):
-    w, b = train(lr, n_iters, x_train, y_train)
-    test_cost = sec(x_test, y_test, w, b)
-    train_cost = sec(x_train, y_train, w, b)
-    cost = max(test_cost, train_cost)
-    
-    print("Cost = ", cost)
-    print(f"(w, b) = ({w:.4f}, {b:.4f})")
-    plot(w, b, cost)
+    w4, w3, w2, w1, b = train(lr, n_iters, x_train, y_train)
 
+    y_train_pred = w4**2 + x_train * (w3 + w2 + w1) + b
+    y_test_pred  = w4**2 + x_test  * (w3 + w2 + w1) + b
+
+    train_cost = sec(y_train_pred, y_train)
+    test_cost  = sec(y_test_pred,  y_test)
+    cost = max(train_cost, test_cost)
+    print(f"(w4, w3, w2, w1, b) = ({w4:.4f}, {w3:.4f}, {w2:.4f}, {w1:.4f}, {b:.4f})")
+    print("Cost = ", cost)
+    plot(w4, w3, w2, w1, b, cost)
 
 if __name__ == "__main__":
-    # Data Processing
-    data = pd.read_csv("RealEstate.csv")
+    df = pd.read_csv("RealEstate.csv")
+    x_raw = df["X2 house age"].to_numpy(dtype=float)
+    y_raw = df["Y house price of unit area"].to_numpy(dtype=float)
 
-    x_total = data['X2 house age']
-    y_total = data['Y house price of unit area']
+    x_scaled = (x_raw - x_raw.min()) / (x_raw.max() - x_raw.min())
 
-    x_train = x_total.head(400).to_numpy()
-    y_train = y_total.head(400).to_numpy()
+    x_train = x_scaled[:400]
+    y_train = y_raw[:400]
+    x_test  = x_scaled[400:]
+    y_test  = y_raw[400:]
 
-    x_test = x_total.tail(15).to_numpy()
-    y_test = y_total.tail(15).to_numpy()
+    learning_rate = 0.01
+    iterations = 10_000_000
 
-    # Normalization
-    scaling = lambda x: (x - x.min()) / (x.max() - x.min())
-    x_train = scaling(x_train).astype(np.float64)
-    x_test = scaling(x_test).astype(np.float64)
-    y_train = y_train.astype(np.float64)
-    y_test = y_test.astype(np.float64)
-
-    lr = 0.03
-    n_iters = 100_000
-
-    predict(lr, n_iters, x_train, y_train, x_test, y_test)
+    predict(learning_rate, iterations, x_train, y_train, x_test, y_test)

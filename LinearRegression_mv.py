@@ -24,6 +24,7 @@ def train_step(lr, n_iters, x1_train, x2_train, x3_train, y_train, x1_test, x2_t
         w3 -= lr * dw3 / n
         b  -= lr * db  / n
 
+        # Logging
         if i % 100_000 == 0 or i == n_iters - 1:
             cost = sec(x1_test, x2_test, x3_test, y_test, w1, w2, w3, b)
             history[idx] = cost

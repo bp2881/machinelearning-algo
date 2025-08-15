@@ -78,26 +78,25 @@ def log_plot(w, b, x_test, y_test, cost, accuracy):
     plt.savefig("log_plot.png")
     plt.show()
 
-
-def plr_plot(w, b, cost):
+def plr_plot(w4, w3, w2, w1, b, cost):
     x_min = house_age.min()
     x_max = house_age.max()
 
     x_line_scaled = np.linspace(0, 1, 100)
-
-    y_line = w * (x_line_scaled ** 2) + b
+    y_line = w4 * x_line_scaled ** 4 + w3 * x_line_scaled ** 3 + w2 * x_line_scaled ** 2 + w1 * x_line_scaled + b
 
     x_line_original = x_line_scaled * (x_max - x_min) + x_min
 
     plt.figure(figsize=(10, 6))
     plt.scatter(house_age, house_price, alpha=0.7, edgecolors='k', label='Data')
     plt.plot(x_line_original, y_line, color='blue', linewidth=2,
-             label=f'y = {w:.4f}·x² + {b:.4f}')
+             label=fr'$y = {w4:.4f}x^4 + {w3:.4f}x^3 + {w2:.4f}x^2 + {w1:.4f}x + {b:.4f}$')
     plt.xlabel('House Age (years)')
     plt.ylabel('House Price of Unit Area')
-    plt.title(f'Polynomial Regression (Degree 2)\nCost: {cost:.4f}')
+    plt.title(f'Polynomial Regression (Degree 4)\nCost: {cost:.4f}')
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
     plt.savefig("plr_plot.png")
     plt.show()
+
