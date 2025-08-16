@@ -13,7 +13,7 @@ def train_step(lr, n_iters, x_train, y_train, x_test, y_test):
     for i in range(n_iters):
         # Logging
         if i % 1000 == 0 or i == n_iters - 1:
-            cost = sec(x_test, y_test, w, b)
+            cost = sec(x_train, y_train, w, b)
             history[idx] = cost
             idx += 1
         
@@ -49,25 +49,25 @@ def predict(lr, n_iters, x_train, y_train, x_test, y_test):
     w, b = train(lr, n_iters, x_train, y_train, x_test, y_test)
     test_cost = sec(x_test, y_test, w, b)
     train_cost = sec(x_train, y_train, w, b)
-    cost = max(test_cost, train_cost)
     
-    print("Cost = ", cost)
+    print("Train Cost = ", train_cost)
+    print("Test Cost = ", test_cost)
     print(f"(w, b) = ({w:.4f}, {b:.4f})")
-    plot(w, b, cost)
+    plot(w, b, test_cost)
 
 
 if __name__ == "__main__":
     # Data Processing
     data = pd.read_csv("RealEstate.csv")
 
-    x_total = data['X2 house age']
-    y_total = data['Y house price of unit area']
+    x_total = data['X2.house.age']
+    y_total = data['Y.house.price.of.unit.area']
 
     x_train = x_total.head(375).to_numpy()
     y_train = y_total.head(375).to_numpy()
 
-    x_test = x_total.tail(40).to_numpy()
-    y_test = y_total.tail(40).to_numpy()
+    x_test = x_total.tail(36).to_numpy()
+    y_test = y_total.tail(36).to_numpy()
 
     # Normalization
     scaling = lambda x: (x - x.min()) / (x.max() - x.min())
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     y_train = y_train.astype(np.float64)
     y_test = y_test.astype(np.float64)
 
-    lr = 0.01
+    lr = 0.003
     n_iters = 10_000
 
     predict(lr, n_iters, x_train, y_train, x_test, y_test)

@@ -62,10 +62,10 @@ if __name__ == "__main__":
 
     x_scaled = (x_raw - x_raw.min()) / (x_raw.max() - x_raw.min())
 
-    x_train = x_scaled[:400]
-    y_train = y_raw[:400]
-    x_test  = x_scaled[400:]
-    y_test  = y_raw[400:]
+    x_train = x_scaled[:375]
+    y_train = y_raw[:375]
+    x_test  = x_scaled[375:]
+    y_test  = y_raw[375:]
 
     learning_rate = 0.01
     iterations = 10_000_000

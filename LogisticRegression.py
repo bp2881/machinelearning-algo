@@ -81,8 +81,8 @@ if __name__ == "__main__":
     y_train = y_total.head(500).to_numpy()
     y_train = np.where(y_train == 'M', 1, 0)
 
-    x_test = x_total.tail(100).to_numpy()
-    y_test = y_total.tail(100).to_numpy()
+    x_test = x_total.tail(53).to_numpy()
+    y_test = y_total.tail(53).to_numpy()
     y_test = np.where(y_test == 'M', 1, 0)
 
     lr = 0.001

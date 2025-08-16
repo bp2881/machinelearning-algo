@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 df = pd.read_csv("RealEstate.csv")
-house_age = df['X2 house age']
-latitude = df['X5 latitude']
-longitude = df['X6 longitude']
-house_price = df['Y house price of unit area']
-convenience_stores = df['X4 number of convenience stores']
-nearest_mrt_station = df['X3 distance to the nearest MRT station']
+house_age = df['X2.house.age']
+latitude = df['X5.latitude']
+longitude = df['X6.longitude']
+house_price = df['Y.house.price.of.unit.area']
+convenience_stores = df['X4.number.of.convenience.stores']
+nearest_mrt_station = df['X3.distance.to.the.nearest.MRT.station']
 
 df2 = pd.read_csv("cancer.csv")
 perimeter_mean = df2["perimeter_mean"]

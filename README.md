@@ -4,13 +4,13 @@ This is my first time trying machine learning algorithms, so there may be severa
 <ol>
   <li><a href="https://github.com/bp2881/machinelearning-algo/blob/master/RealEstate.csv">Real Estate dataset</a></li>
   <ul>
-    <li>rows - 415, columns - 7</li>
-    <li>trainset - (1, 375) [375], testset - (376, 415) [40]</li>
+    <li>rows - 411, columns - 7</li>
+    <li>trainset - (1, 375) [375], testset - (376, 411) [36]</li>
   </ul>
   <li><a href="https://github.com/bp2881/machinelearning-algo/blob/master/cancer.csv">Cancer dataset</a></li>
   <ul>
-    <li>rows - 570, columns - 32</li>
-    <li>trainset - (1, 500) [500], testset - (501, 570) [70]</li>
+    <li>rows - 553, columns - 32</li>
+    <li>trainset - (1, 500) [500], testset - (501, 553) [53]</li>
   </ul>
 </ol>
 
