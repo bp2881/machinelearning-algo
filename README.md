@@ -21,7 +21,7 @@ This is my first time trying machine learning algorithms, so there may be severa
   <li>Current optimal line => y = -11.0365x + 42.4959</li>
   <li>learning rate - 0.01, iterations - 10k</li>
   <li>Prediction cost on test cases - <b>69.5</b></li>
-  <img src="ov_plot.png" alt="There's nothing to see here, or is there?" width="75%">
+  <img src="./src/ov_plot.png" alt="There's nothing to see here, or is there?" width="75%">
 </ul>
 
 <h2>Linear Regression with multiple variables</h2>
@@ -31,7 +31,7 @@ This is my first time trying machine learning algorithms, so there may be severa
   <li>Current optimal line => y = -7.7655x + 41.0573</li>
   <li>learning rate - 0.0003, iterations - 100k</li>
   <li>Prediction cost on test cases - <b>16.03</b></li>
-  <img src="mv_plot.png" alt="There's nothing to see here, or is there?" width="75%">
+  <img src="./src/mv_plot.png" alt="There's nothing to see here, or is there?" width="75%">
 </ul>
 
 <h2>RESOURCES:</h2>

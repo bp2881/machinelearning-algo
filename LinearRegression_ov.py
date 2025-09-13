@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from plot import ov_plot as plot
 from numba import njit
+from time import time
 
 @njit
 def train_step(lr, n_iters, x_train, y_train, x_test, y_test):
@@ -12,13 +13,13 @@ def train_step(lr, n_iters, x_train, y_train, x_test, y_test):
 
     for i in range(n_iters):
         # Logging
-        if i % 1000 == 0 or i == n_iters - 1:
-            cost = sec(x_train, y_train, w, b)
-            history[idx] = cost
-            idx += 1
-        
         y_pred = w * x_train + b
         error = y_pred - y_train
+
+        if i % 1000 == 0 or i == n_iters - 1:
+            cost = 0.5 * np.dot(error, error) / n
+            history[idx] = cost
+            idx += 1
 
         dw = np.dot(error, x_train)
         db = np.sum(error)
@@ -46,6 +47,7 @@ def sec(X, Y, w, b):
 
 
 def predict(lr, n_iters, x_train, y_train, x_test, y_test):
+    st = time()
     w, b = train(lr, n_iters, x_train, y_train, x_test, y_test)
     test_cost = sec(x_test, y_test, w, b)
     train_cost = sec(x_train, y_train, w, b)
@@ -53,30 +55,32 @@ def predict(lr, n_iters, x_train, y_train, x_test, y_test):
     print("Train Cost = ", train_cost)
     print("Test Cost = ", test_cost)
     print(f"(w, b) = ({w:.4f}, {b:.4f})")
+    ed = time()
+    print(f"time: {(ed - st):.4f}")
     plot(w, b, test_cost)
 
 
 if __name__ == "__main__":
     # Data Processing
-    data = pd.read_csv("RealEstate.csv")
+    ## Train on processed data and test on actual data
+    train_data = pd.read_csv("RealEstate.csv")
+    test_data = pd.read_csv("RealEstate_old.csv")
+    
+    x_train_total = train_data['X2.house.age'].to_numpy()
+    y_train_total = train_data['Y.house.price.of.unit.area'].to_numpy()
 
-    x_total = data['X2.house.age']
-    y_total = data['Y.house.price.of.unit.area']
+    x_test_total = test_data['X2 house age'].to_numpy()
+    y_test_total = test_data['Y house price of unit area'].to_numpy()
 
-    x_train = x_total.head(375).to_numpy()
-    y_train = y_total.head(375).to_numpy()
-
-    x_test = x_total.tail(36).to_numpy()
-    y_test = y_total.tail(36).to_numpy()
 
     # Normalization
     scaling = lambda x: (x - x.min()) / (x.max() - x.min())
-    x_train = scaling(x_train).astype(np.float64)
-    x_test = scaling(x_test).astype(np.float64)
-    y_train = y_train.astype(np.float64)
-    y_test = y_test.astype(np.float64)
 
-    lr = 0.003
-    n_iters = 10_000
+    x_train = scaling(x_train_total).astype(np.float64)
+    x_test = scaling(x_test_total).astype(np.float64)
+    y_train = y_train_total.astype(np.float64)
+    y_test = y_test_total.astype(np.float64)
 
+    lr = 0.01
+    n_iters = 100_000
     predict(lr, n_iters, x_train, y_train, x_test, y_test)
