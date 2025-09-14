@@ -81,6 +81,6 @@ if __name__ == "__main__":
     y_train = y_train_total.astype(np.float64)
     y_test = y_test_total.astype(np.float64)
 
-    lr = 0.01
-    n_iters = 100_000
+    lr = 0.1
+    n_iters = 500
     predict(lr, n_iters, x_train, y_train, x_test, y_test)

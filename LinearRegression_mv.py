@@ -62,22 +62,18 @@ def predict(lr, n_iters, x1_train, x2_train, x3_train, y_train, x1_test, x2_test
 
 if __name__ == "__main__":
     # Data Processing
-    data = pd.read_csv("RealEstate.csv")
+    train_data = pd.read_csv("RealEstate.csv")
+    test_data = pd.read_csv("RealEstate_old.csv")
 
-    x1_total = data['X2.house.age']
-    x2_total = data['X3.distance.to.the.nearest.MRT.station']
-    x3_total = data['X4.number.of.convenience.stores']
-    y_total = data['Y.house.price.of.unit.area']
+    x1_train = train_data['X2.house.age'].to_numpy()
+    x2_train = train_data['X3.distance.to.the.nearest.MRT.station'].to_numpy()
+    x3_train = train_data['X4.number.of.convenience.stores'].to_numpy()
+    y_train = train_data['Y.house.price.of.unit.area'].to_numpy()
 
-    x1_train = x1_total.head(375).to_numpy()
-    x2_train = x2_total.head(375).to_numpy()
-    x3_train = x3_total.head(375).to_numpy()
-    y_train = y_total.head(375).to_numpy()
-
-    x1_test = x1_total.tail(36).to_numpy()
-    x2_test = x2_total.tail(36).to_numpy()
-    x3_test = x3_total.tail(36).to_numpy()
-    y_test = y_total.tail(36).to_numpy()
+    x1_test = test_data['X2 house age'].to_numpy()
+    x2_test = test_data['X3 distance to the nearest MRT station'].to_numpy()
+    x3_test = test_data['X4 number of convenience stores'].to_numpy()
+    y_test = test_data['Y house price of unit area'].to_numpy()
 
     # Normalization
     x1_min, x1_max = x1_train.min(), x1_train.max()
@@ -92,7 +88,7 @@ if __name__ == "__main__":
     x2_test = (x2_test - x2_min) / (x2_max - x2_min)
     x3_test = (x3_test - x3_min) / (x3_max - x3_min)
 
-    lr = 0.01
-    n_iters = 30_000
+    lr = 0.03
+    n_iters = 10_000
     
     predict(lr, n_iters, x1_train, x2_train, x3_train, y_train, x1_test, x2_test, x3_test, y_test)

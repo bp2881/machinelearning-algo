@@ -2,13 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-df = pd.read_csv("RealEstate.csv")
-house_age = df['X2.house.age']
-latitude = df['X5.latitude']
-longitude = df['X6.longitude']
-house_price = df['Y.house.price.of.unit.area']
-convenience_stores = df['X4.number.of.convenience.stores']
-nearest_mrt_station = df['X3.distance.to.the.nearest.MRT.station']
+df = pd.read_csv("RealEstate_old.csv")
+house_age = df['X2 house age']
+latitude = df['X5 latitude']
+longitude = df['X6 longitude']
+house_price = df['Y house price of unit area']
+convenience_stores = df['X4 number of convenience stores']
+nearest_mrt_station = df['X3 distance to the nearest MRT station']
 
 df2 = pd.read_csv("cancer.csv")
 perimeter_mean = df2["perimeter_mean"]
@@ -34,7 +34,7 @@ def ov_plot(w, b, cost):
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("./src/ov_plot.png")
+    plt.savefig("./assets/ov_plot.png")
     plt.show()
 
 def mv_plot(w1, w2, w3, b, cost):
@@ -60,7 +60,7 @@ def mv_plot(w1, w2, w3, b, cost):
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("./src/mv_plot.png")
+    plt.savefig("./assets/mv_plot.png")
     plt.show()
 
 
@@ -75,7 +75,7 @@ def log_plot(w, b, x_test, y_test, cost, accuracy):
     plt.title(f"Logistic Regression\nCost: {cost:.4f} Accuracy: {accuracy:.2f}%")
     plt.legend()
     plt.grid(True)
-    plt.savefig("./src/log_plot.png")
+    plt.savefig("./assets/log_plot.png")
     plt.show()
 
 def plr_plot(w4, w3, w2, w1, b, cost):
@@ -97,6 +97,6 @@ def plr_plot(w4, w3, w2, w1, b, cost):
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("./src/plr_plot.png")
+    plt.savefig("./assets/plr_plot.png")
     plt.show()
 
