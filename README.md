@@ -42,8 +42,7 @@ This is my first time trying machine learning algorithms, so there may be severa
 
 <h2>TODO:</h2>
 <ol>
-  <li>Recheck core logic</li>
-  <li>Remove outliers</li>
-  <li>Complete Polynomial Regression</li>
+  <li>Create a correct type of graph for Linear Regression with multiple vars</li>
+  <li>Preprocess new datasets and include analysis</li>
   <li>Update README to include Logistic Regression and Polynomial Regression</li>
 </ol>
