@@ -1,7 +1,7 @@
 ### House Price dataset
 #hp <- read.csv("/home/pranav/Downloads/coding/projects/machinelearning-algo/house_price_old.csv", sep = ";", header = TRUE)
 hp <-read.csv("/home/pranav/Downloads/coding/projects/machinelearning-algo/house_price.csv")
-nrow(hp) # 1_13_58_150 (1.1Cr)
+nrow(hp) # 1_13_58_150 (11M)
 ncol(hp) # 15
 
 summary(hp$price)
@@ -32,3 +32,23 @@ write.csv(hp, file="/home/pranav/Downloads/coding/projects/machinelearning-algo/
 # Correlation b/w variables
 str(hp)
 cor(hp$area, hp$price) # 0.29 [ THE HIGHEST :( ]
+
+
+## Diabetes Prediction dataset
+
+dp <- read.csv('./diabetes_prediction_dataset.csv')
+nrow(dp) # 1_00_000 (100k)
+ncol(dp) # 9
+
+summary(dp)
+
+# Correlation b/w vars (Top 3)
+
+# BMI
+cor(dp$bmi, dp$diabetes) # 0.214
+
+# HbA1c Level
+cor(dp$HbA1c_level, dp$diabetes) # 0.400
+
+# Blood Glucose Level
+cor(dp$blood_glucose_level, dp$diabetes) # 0.420
