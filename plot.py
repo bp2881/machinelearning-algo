@@ -80,30 +80,30 @@ def log_plot(w, b, x_test, y_test, cost, accuracy):
     #plt.savefig("./assets/log_plot.png")
     plt.show()
 
-def plr_plot(w, b, cost, x_train, y_train, poly):
-    area = x_train[:, 1]
+
+def plr_plot(w4, w3, w2, w1, b, cost, x_train, y_train):
+    area = x_train  
     house_price = y_train
 
     x_min, x_max = area.min(), area.max()
     x_line = np.linspace(x_min, x_max, 200)
 
-    if x_train.shape[1] == 2:
-        avg_level = np.mean(x_train[:, 0])
-        X_line = np.column_stack((np.full_like(x_line, avg_level), x_line))
-    else:
-        X_line = x_line.reshape(-1, 1)
-
-    X_line_poly = poly.transform(X_line)
-    y_line = X_line_poly @ w + b
+    y_line = (
+        w4 * (x_line ** 4) +
+        w3 * (x_line ** 3) +
+        w2 * (x_line ** 2) +
+        w1 * x_line +
+        b
+    )
 
     plt.figure(figsize=(10, 6))
-    plt.scatter(area, house_price, alpha=0.7, edgecolors='k', label='Data')
-    plt.plot(x_line, y_line, color='blue', linewidth=2, label='Polynomial Fit')
-    plt.xlabel('Area')
-    plt.ylabel('House Price')
-    plt.title(f'Polynomial Regression\nCost: {cost:.4f}')
+    plt.scatter(area, house_price, alpha=0.7, edgecolors='k', label='Training Data')
+    plt.plot(x_line, y_line, linewidth=2, label='Polynomial Fit')
+
+    plt.xlabel("Area")
+    plt.ylabel("House Price")
+    plt.title(f"Polynomial Regression (Cost = {cost:.4f})")
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    #plt.savefig("./assets/plr_plot.png")
     plt.show()
