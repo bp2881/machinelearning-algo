@@ -2,17 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-area = df['area'][:10_000]
-latitude = df['geo_lat'][:10_000]
-longitude = df['geo_lon'][:10_000]
-house_price = df['price'][:10_000]
-rooms = df['rooms'][:10_000]
-kitchen_area = df['kitchen_area'][:10_000]
-
-#df2 = pd.read_csv("cancer.csv")
-#perimeter_mean = df2["perimeter_mean"]
-#diagnosis = df2["diagnosis"]
-
 
 def ov_plot(w, b, cost):
     x_min = area.min()
