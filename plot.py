@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-df = pd.read_csv("house_price.csv")
 area = df['area'][:10_000]
 latitude = df['geo_lat'][:10_000]
 longitude = df['geo_lon'][:10_000]
