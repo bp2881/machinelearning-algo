@@ -34,7 +34,7 @@ def ov_plot(w, b, cost):
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("./assets/ov_plot.png")
+    #plt.savefig("./assets/ov_plot.png")
     plt.show()
 
 
@@ -62,7 +62,7 @@ def mv_plot(w1, w2, w3, b, cost):
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("./assets/mv_plot.png")
+    #plt.savefig("./assets/mv_plot.png")
     plt.show()
 
 
@@ -77,7 +77,7 @@ def log_plot(w, b, x_test, y_test, cost, accuracy):
     plt.title(f"Logistic Regression\nCost: {cost:.4f} Accuracy: {accuracy:.2f}%")
     plt.legend()
     plt.grid(True)
-    plt.savefig("./assets/log_plot.png")
+    #plt.savefig("./assets/log_plot.png")
     plt.show()
 
 def plr_plot(w, b, cost, x_train, y_train, poly):
@@ -105,5 +105,5 @@ def plr_plot(w, b, cost, x_train, y_train, poly):
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("./assets/plr_plot.png")
+    #plt.savefig("./assets/plr_plot.png")
     plt.show()
