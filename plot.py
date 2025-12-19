@@ -2,29 +2,25 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+def ov_plot(w, b, test_cost, x_train, y_train):
+    x_min = x_train.min()
+    x_max = x_train.max()
 
-def ov_plot(w, b, cost):
-    x_min = area.min()
-    x_max = area.max()
-
-    x_line_scaled = np.linspace(0, 1, 100)
-    y_line = w * x_line_scaled + b
-
-    x_line_original = x_line_scaled * (x_max - x_min) + x_min
+    # Line for prediction
+    x_line = np.linspace(x_min, x_max, 100)
+    y_line = w * x_line + b
 
     plt.figure(figsize=(10, 6))
-    plt.scatter(area, house_price, alpha=0.7, edgecolors='k', label='Data')
-    plt.plot(x_line_original, y_line, color='blue', linewidth=2,
+    plt.scatter(x_train, y_train, alpha=0.7, edgecolors='k', label='Data')
+    plt.plot(x_line, y_line, color='blue', linewidth=2,
              label=f'y = {w:.4f}x + {b:.4f}')
     plt.xlabel('House Area')
     plt.ylabel('House Price')
-    plt.title(f'Prediction with Cost: {cost:.4f}')
+    plt.title(f'Prediction with Cost: {test_cost:.4f}')
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    #plt.savefig("./assets/ov_plot.png")
     plt.show()
-
 
 def mv_plot(w1, w2, w3, b, cost):
     scale = lambda x: (x - x.min()) / (x.max() - x.min())
