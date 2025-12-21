@@ -37,10 +37,9 @@ def ov_plot(w, b, cost):
     plt.savefig("./assets/ov_plot.png")
     plt.show()
 
+
 def mv_plot(w1, w2, w3, b, cost):
     scale = lambda x: (x - x.min()) / (x.max() - x.min())
-
-    area_scaled = scale(area)
     kitchen_scaled = scale(kitchen_area)
     rooms_scaled = scale(rooms)
 
@@ -73,8 +72,8 @@ def log_plot(w, b, x_test, y_test, cost, accuracy):
 
     plt.plot(x_vals, y_vals, label="Sigmoid Curve")
     plt.scatter(x_test, y_test, color='red', label="Test Data")
-    plt.xlabel("perimeter_mean")
-    plt.ylabel("Probability (Malignant)")
+    plt.xlabel("Bolld Glucose level")
+    plt.ylabel("Diabetes")
     plt.title(f"Logistic Regression\nCost: {cost:.4f} Accuracy: {accuracy:.2f}%")
     plt.legend()
     plt.grid(True)
@@ -102,4 +101,3 @@ def plr_plot(w4, w3, w2, w1, b, cost):
     plt.tight_layout()
     plt.savefig("./assets/plr_plot.png")
     plt.show()
-
