@@ -30,10 +30,17 @@ This is my first time trying machine learning algorithms, so there may be severa
 <ul>
   <li>Considered <a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/RealEstate.csv">Real Estate dataset</a></li>
   <li>Considered <b>X2 house age, X3 distance to the nearest MRT station, X4 number of convenience stores</b> as input factors and <b>Y house price of unit area</b> as output factor</li>
-  <li>Current optimal line => y = -7.7655x + 41.0573</li>
+  <li>Current optimal line => y = # will be changed</li>
   <li>learning rate - 0.0003, iterations - 100k</li>
-  <li>Prediction cost on test cases - <b>16.03</b></li>
+  <li>Prediction cost on test cases - <b>86.06</b></li>
   <img src="./assets/mv_plot.png" alt="There's nothing to see here, or is there?" width="75%">
+</ul>
+
+<h2>TODO:</h2>
+<ul>
+  <li>LinearRegression_mv is currently biased, fix that </li>
+  <li>No need of normalization in LinearRegression_ov as the features are normalized using z_score already </li>
+  <li>Update README in next commit</li>
 </ul>
 
 <h2>RESOURCES:</h2>

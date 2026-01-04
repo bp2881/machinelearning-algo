@@ -6,7 +6,7 @@ ncol(hp) # 8
 
 summary(hp)
 
-# No Outliers, missing values
+## No Outliers, missing values
 
 # Correlation b/w variables
 str(hp)
@@ -15,5 +15,25 @@ cor(hp$X2.house.age, hp$Y.house.price.of.unit.area) # -0.21
 cor(hp$X4.number.of.convenience.stores, hp$Y.house.price.of.unit.area) # 0.57  
 cor(hp$X3.distance.to.the.nearest.MRT.station, hp$Y.house.price.of.unit.area) # -0.67 [ THE LIKLIEST :/ ]
 
+# Select features
+features <- hp[, c("X2.house.age",
+                    "X3.distance.to.the.nearest.MRT.station",
+                    "X4.number.of.convenience.stores")]
 
+# Z-score normalization
+features_norm <- scale(features)
 
+# Replace original columns with normalized ones
+hp[, c("X2.house.age",
+       "X3.distance.to.the.nearest.MRT.station",
+       "X4.number.of.convenience.stores")] <- features_norm
+
+summary(hp[, c("X2.house.age",
+               "X3.distance.to.the.nearest.MRT.station",
+               "X4.number.of.convenience.stores")])
+
+write.csv(
+  hp,
+  "/home/pranav/Downloads/coding/projects/machinelearning-algo_pytorch/RealEstate.csv",
+  row.names = FALSE
+)
