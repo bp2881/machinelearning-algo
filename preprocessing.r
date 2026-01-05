@@ -15,6 +15,13 @@ cor(hp$X2.house.age, hp$Y.house.price.of.unit.area) # -0.21
 cor(hp$X4.number.of.convenience.stores, hp$Y.house.price.of.unit.area) # 0.57  
 cor(hp$X3.distance.to.the.nearest.MRT.station, hp$Y.house.price.of.unit.area) # -0.67 [ THE LIKLIEST :/ ]
 
+## Correlation b/w features (Assumptions of Linear Regression)
+
+cor(hp$X2.house.age, hp$X3.distance.to.the.nearest.MRT.station) # 0.025
+cor(hp$X2.house.age, hp$X4.number.of.convenience.stores) # 0.049
+cor(hp$X3.distance.to.the.nearest.MRT.station, hp$X4.number.of.convenience.stores) # -0.602 [ :( ]
+## Conclusion: let go of X4 as it has least corr when compared to X3
+
 # Select features
 features <- hp[, c("X2.house.age",
                     "X3.distance.to.the.nearest.MRT.station",
@@ -31,9 +38,3 @@ hp[, c("X2.house.age",
 summary(hp[, c("X2.house.age",
                "X3.distance.to.the.nearest.MRT.station",
                "X4.number.of.convenience.stores")])
-
-write.csv(
-  hp,
-  "/home/pranav/Downloads/coding/projects/machinelearning-algo_pytorch/RealEstate.csv",
-  row.names = FALSE
-)
