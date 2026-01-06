@@ -20,7 +20,15 @@ cor(hp$X3.distance.to.the.nearest.MRT.station, hp$Y.house.price.of.unit.area) # 
 cor(hp$X2.house.age, hp$X3.distance.to.the.nearest.MRT.station) # 0.025
 cor(hp$X2.house.age, hp$X4.number.of.convenience.stores) # 0.049
 cor(hp$X3.distance.to.the.nearest.MRT.station, hp$X4.number.of.convenience.stores) # -0.602 [ :( ]
-## Conclusion: let go of X4 as it has least corr when compared to X3
+## Conclusion: Might have to let go of X4 as it has least corr when compared to X3 and has a relation with X3
+
+## Auto Correlation
+Box.test(hp$X4.number.of.convenience.stores, lag = 410, type = "Ljung-Box") # p-value = 0.00138
+# Auto correlation found here
+## Definitly have to let go of X4
+
+
+## Normalization
 
 # Select features
 features <- hp[, c("X2.house.age",

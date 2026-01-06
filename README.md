@@ -7,12 +7,12 @@ This is my first time trying machine learning algorithms, so there may be severa
   <li><a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/RealEstate.csv">Real Estate dataset</a></li>
   <ul>
     <li>rows - 411, columns - 7</li>
-    <li>trainset - (1, 375) [375], testset - (376, 411) [36]</li>
+    <li>trainset - 80%, testset - 20%</li>
   </ul>
   <li><a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/cancer.csv">Cancer dataset</a></li>
   <ul>
     <li>rows - 553, columns - 32</li>
-    <li>trainset - (1, 500) [500], testset - (501, 553) [53]</li>
+    <li>trainset - 80%, testset - 20%</li>
   </ul>
 </ol>
 
@@ -38,8 +38,7 @@ This is my first time trying machine learning algorithms, so there may be severa
 
 <h2>TODO:</h2>
 <ul>
-  <li>LinearRegression_mv is currently biased, fix that </li>
-  <li>No need of normalization in LinearRegression_ov as the features are normalized using z_score already </li>
+  <li>LinearRegression_mv is currently biased, fix that, EDIT: residual plot shows a pattern</li>
   <li>Update README in next commit</li>
 </ul>
 
