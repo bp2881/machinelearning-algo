@@ -1,13 +1,12 @@
 This is my first time trying machine learning algorithms, so there may be several mistakes or whole logic may be wrong. 
 
-(REVAMP VERSION README WILL BE SOON CREATED)
-
 <h2>About Data</h2>
 <ol>
   <li><a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/RealEstate.csv">Real Estate dataset</a></li>
   <ul>
     <li>rows - 411, columns - 7</li>
     <li>trainset - 80%, testset - 20%</li>
+    <li>Used features have been normalized using z-score in dataset</li>
   </ul>
   <li><a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/cancer.csv">Cancer dataset</a></li>
   <ul>
@@ -16,23 +15,23 @@ This is my first time trying machine learning algorithms, so there may be severa
   </ul>
 </ol>
 
-<h2>Linear Regression with one variable</h2>
+<h2>Linear Regression with one variable (underfit)</h2>
 <ul>
   <li>Considered <a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/RealEstate.csv">Real Estate dataset</a></li>
-  <li>Considered <b>X3 distance to the nearest MRT station</b> as input factor and <b>Y house price</b> as output factor</li>
-  <li>Current optimal line => y = -11.0365x + 42.4959</li>
-  <li>learning rate - 0.01, iterations - 10k</li>
-  <li>Prediction cost on test cases - <b>69.5</b></li>
+  <li>Considered <b>"X3 distance to the nearest MRT station"</b> as input feature and <b>"Y house price"</b> as output factor</li>
+  <li>Current optimal line => y = -9.43x + 37.88</li>
+  <li>learning rate - 0.01, iterations - 300</li>
+  <li>Prediction cost on test cases - <b>102.47</b></li>
   <img src="./assets/ov_plot.png" alt="There's nothing to see here, or is there?" width="75%">
 </ul>
 
-<h2>Linear Regression with multiple variables</h2>
+<h2>Linear Regression with multiple variables (slightly underfit)</h2>
 <ul>
   <li>Considered <a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/RealEstate.csv">Real Estate dataset</a></li>
-  <li>Considered <b>X2 house age, X3 distance to the nearest MRT station, X4 number of convenience stores</b> as input factors and <b>Y house price of unit area</b> as output factor</li>
-  <li>Current optimal line => y = # will be changed</li>
-  <li>learning rate - 0.0003, iterations - 100k</li>
-  <li>Prediction cost on test cases - <b>86.06</b></li>
+  <li>Considered <b>"X2 house age", "X3 distance to the nearest MRT station", "X4 number of convenience stores"</b> as input features and <b>"Y house price of unit area"</b> as output factor</li>
+  <li>Current optimal line => y = -3.09x1 - 7.08x2 + 3.70x3 + 37.94</li>
+  <li>learning rate - 0.01, iterations - 300</li>
+  <li>Prediction cost on test cases - <b>86.03</b></li>
   <img src="./assets/mv_plot.png" alt="There's nothing to see here, or is there?" width="75%">
 </ul>
 
