@@ -61,7 +61,7 @@ scatter.smooth(bmi_used, logit_pr, cex=0.5)
 scatter.smooth(HbA1c_level_used, logit_pr, cex=0.5)
 scatter.smooth(blood_glucose_level_used, logit_pr, cex=0.5) # Non Linear (use spline or log)
 
-## Checking for collinearity
+## Checking for multi-collinearity
 cor(bmi_used, HbA1c_level_used) # 0.08
 cor(age_used, HbA1c_level_used) # 0.10
 cor(blood_glucose_level_used, HbA1c_level_used) # 0.16
