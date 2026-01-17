@@ -1,4 +1,8 @@
 d = read.csv("./diabetes_prediction_dataset.csv")
+
+nrow(d) # 100000
+ncol(d) # 9
+
 str(d)
 summary(d)
 
@@ -73,5 +77,16 @@ cor(age_used, blood_glucose_level_used) # 0.11
 ## Final Features to be considered
 # 1. blood_glucose_level (use spline or log)
 # 2. HbA1c_level (linear)
-# 3. bmi_used (linear)
-# 4. age_used (use spline or quadratic)
+# 3. bmi (linear)
+# 4. age (use spline or quadratic)
+
+# Normalizing features using Z score
+
+features <- d[, c("age", "bmi", "HbA1c_level", "blood_glucose_level")]
+features_norm <- scale(features)
+
+d[, c("age", "bmi", "HbA1c_level", "blood_glucose_level")] <- features_norm
+
+summary(d[, c("age", "bmi", "HbA1c_level", "blood_glucose_level")])
+
+write.csv(d, file = "diabetes_prediction_dataset.csv")
