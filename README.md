@@ -45,9 +45,8 @@ This is my first time trying machine learning algorithms, so there may be severa
   <li>Testing Loss: <b>0.1265</b>, Accuracy: <b>95.77</b></li>
   <img src="./assets/log_plot.png" alt="There's nothing to see here, or is there?" width="75%">
   <br>
-  ```bash
-  The PDP does not necessarily span the full probability range because other features are fixed at their mean values, limiting the maximum achievable logit
-  ```
+  
+  <i><b>The PDP does not necessarily span the full probability range because other features are fixed at their mean values, limiting the maximum achievable logit.</b></i>
 </ul>
 
 <h2>TODO:</h2>
