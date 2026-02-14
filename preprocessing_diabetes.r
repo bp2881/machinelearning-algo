@@ -15,7 +15,7 @@ u.HbA1c_level <- glm(d$diabetes~d$HbA1c_level, family=binomial) # p < 0.25
 u.blood_glucose_level <- glm(d$diabetes~d$blood_glucose_level, family=binomial)
 u.bmi <- glm(d$diabetes~d$bmi, family=binomial)
 
-d$gender <- ifelse(d$gender == "Male", "Male", "Female/Other") # There are only 2 genders
+d$gender <- ifelse(d$gender == "Male", "Male", "Female") # There are only 2 genders
 d$gender <- factor(d$gender)
 
 u.gender <- glm(diabetes~gender, family=binomial, data=d)
