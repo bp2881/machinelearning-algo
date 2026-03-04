@@ -1,5 +1,7 @@
 This is my first time trying machine learning algorithms, so there may be several mistakes or whole logic may be wrong. 
 
+In the newer commits/versions, google colab has been used instead of local computer via VS Code extension. The boilerplate for it is present in every file, if not needed ignore it.
+
 <h2>About Data</h2>
 <ol>
   <li><a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/RealEstate.csv">Real Estate dataset</a></li>
@@ -25,7 +27,7 @@ This is my first time trying machine learning algorithms, so there may be severa
   <img src="./assets/ov_plot.png" alt="There's nothing to see here, or is there?" width="75%">
 </ul>
 
-<h2>Linear Regression with multiple variables (slightly underfit)</h2>
+<h2>Linear Regression with multiple variables (underfit)</h2>
 <ul>
   <li>Considered <a href="https://github.com/bp2881/machinelearning-algo/blob/pytorch/RealEstate.csv">Real Estate dataset</a></li>
   <li>Considered <b>"X2 house age", "X3 distance to the nearest MRT station", "X4 number of convenience stores"</b> as input features and <b>"Y house price of unit area"</b> as output factor</li>
@@ -49,10 +51,36 @@ This is my first time trying machine learning algorithms, so there may be severa
   <i><b>The PDP does not necessarily span the full probability range because other features are fixed at their mean values, limiting the maximum achievable logit.</b></i>
 </ul>
 
+<h2>ABOUT MY APPROACH:</h2>
+<p>Due to me still being in the learning phase, my approach will change constantly and sometimes drastically.
+
+<h4>Current Approach:</h4>
+<ol>
+  <li>Data Cleaning & Analysis:
+  <ul>
+    <li>Find Outliers, Missing values, etc. and correct them.</li>
+    <li>Learn more about data (finding correlation, auto correlation, Linearity, etc.).</li>
+    <li>After getting satisfied no. of observations, I normalize the data (Z-score).</li>
+  </ul>
+  </li>
+  <li> Prediction:
+  <ul>
+    <li>Starting with Simple Linear Regression (if conditions satisfied while analysis) and then step up slowly if it's no good.</li>
+    <li>Split into Train and Test Data (80:20) and start prediction using Gradient Descent method.</li>
+    <li>If any anamoly is found then switch up to using Cross Validation. Now Train, Test and Cross Validation Data is split using 60:20:20 ratio.</li>
+  </ul>
+  </li>
+  <li>Repeating Steps Until satisfied:
+  <ul>  
+    <li>This is a loop. Have to constantly find better way to predict it using limited resources and making proper tradeoff b/w prediction and iteration.</li>
+  </ul>
+  </li>
+</ol>
+</p>
+
 <h2>TODO:</h2>
 <ul>
-  <li>LinearRegression_mv is currently biased, fix that, EDIT: residual plot shows a pattern</li>
-  <li>Update README in next commit</li>
+  <li>Next Update: For Realestate Data, Linear models underfit hence have to use Polynomial Regression. </li>
 </ul>
 
 <h2>RESOURCES:</h2>
